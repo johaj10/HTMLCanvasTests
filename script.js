@@ -15,7 +15,7 @@ ctx.clearRect(25, 25, 140, 90);
 ctx.font = '30px Arial'
 ctx.fillStyle = 'purple';
 ctx.fillText('Hello', 400, 50);
-*/
+
 
 
 ctx.beginPath();
@@ -28,5 +28,22 @@ ctx.fill();
 ctx.beginPath();
 ctx.arc(300, 300, 20, 0, Math.PI*2);
 ctx.stroke();
+*/
 
-console.log(canvas.getBoundingClientRect());
+function mousePosition(event) {
+    let rect = canvas.getBoundingClientRect();
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+
+    console.log("Coordinate x: " + x, "Coordinate y: " + y);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI*2);
+    ctx.stroke();
+
+}
+
+
+canvas.addEventListener("mousedown", (e) => {
+    mousePosition(e);
+});
