@@ -3,10 +3,13 @@ const ctx = canvas.getContext('2d');
 
 const degToRad = (degrees) => (Math.PI/180) * degrees;
 
+const field_image = document.getElementById('source');
 
 
 let circleDrawn = false;
 let oldX, oldY;
+
+ctx.drawImage(field_image, 0, 0, 360, 180);
 
 function mousePosition(event) {
     let rect = canvas.getBoundingClientRect();
@@ -15,17 +18,22 @@ function mousePosition(event) {
 
     console.log("Coordinate x: " + x, "Coordinate y: " + y);
 
-    if (!circleDrawn) {
-        ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI*2);
-        ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI*2);
+    ctx.stroke();
+    
+
+    // if (!circleDrawn) {
+    //     ctx.beginPath();
+    //     ctx.arc(x, y, 8, 0, Math.PI*2);
+    //     ctx.stroke();
         
-    } else {
-        ctx.clearRect(oldX, oldY, 8, 8);
-        ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI*2);
-        ctx.stroke();
-    }
+    // } else {
+    //     ctx.clearRect(oldX, oldY, 8, 8);
+    //     ctx.beginPath();
+    //     ctx.arc(x, y, 8, 0, Math.PI*2);
+    //     ctx.stroke();
+    // }
 
     oldX = x;
     oldY = y;
