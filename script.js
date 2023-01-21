@@ -9,66 +9,38 @@ const field_image = document.getElementById('source');
 let circleDrawn = false;
 let oldX, oldY;
 
-ctx.drawImage(field_image, 0, 0, 360, 180);
+// ctx.drawImage(field_image, 0, 0, 360, 180);
 
-function mousePosition(event) {
-    let rect = canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
+function draw(event=null) {
+    if (event != null) {
+        let rect = canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
 
-    console.log("Coordinate x: " + x, "Coordinate y: " + y);
+        ctx.clearRect(0, 0, 360, 180);
+        ctx.drawImage(field_image, 0, 0, 360, 180);
 
-    ctx.beginPath();
-    ctx.arc(x, y, 8, 0, Math.PI*2);
-    ctx.stroke();
+        ctx.beginPath();
+        ctx.fillStyle = 'orange';
+        ctx.arc(x, y, 8, 0, Math.PI*2);
+        ctx.stroke();
+        console.log("Coordinate x: " + x, "Coordinate y: " + y);
+
+    } else {
+        ctx.drawImage(field_image, 0, 0, 360, 180);
+    }
     
-
-    // if (!circleDrawn) {
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, 8, 0, Math.PI*2);
-    //     ctx.stroke();
-        
-    // } else {
-    //     ctx.clearRect(oldX, oldY, 8, 8);
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, 8, 0, Math.PI*2);
-    //     ctx.stroke();
-    // }
-
-    oldX = x;
-    oldY = y;
-    circleDrawn = true;
 }
 
+function mouseDown(event) {
+    draw(event);
+}
 
-canvas.addEventListener("mousedown", (e) => {
-    mousePosition(e);
+canvas.addEventListener('mousedown', (e) => {
+    mouseDown(e);
 });
 
+field_image.addEventListener('load', (e) => {
+    draw();
+})
 
-/*
-ctx.fillStyle = 'red';
-ctx.fillRect(20, 20, 300, 100);
-
-ctx.fillStyle = 'green';
-ctx.strokeRect(100, 200, 150, 100);
-
-ctx.clearRect(25, 25, 140, 90);
-
-ctx.font = '30px Arial'
-ctx.fillStyle = 'purple';
-ctx.fillText('Hello', 400, 50);
-
-
-
-ctx.beginPath();
-ctx.moveTo(50, 50);
-ctx.lineTo(150, 50);
-ctx.lineTo(100, 200);
-ctx.closePath();
-ctx.fill();
-
-ctx.beginPath();
-ctx.arc(300, 300, 20, 0, Math.PI*2);
-ctx.stroke();
-*/
