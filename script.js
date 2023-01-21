@@ -21,10 +21,11 @@ function draw(event=null) {
         ctx.drawImage(field_image, 0, 0, 360, 180);
 
         ctx.beginPath();
-        ctx.fillStyle = 'orange';
+        ctx.strokeStyle = 'orange';
         ctx.arc(x, y, 8, 0, Math.PI*2);
         ctx.stroke();
         console.log("Coordinate x: " + x, "Coordinate y: " + y);
+        console.log(Math.round(Math.round(x)/30) * Math.round(Math.round(y)/30));
 
     } else {
         ctx.drawImage(field_image, 0, 0, 360, 180);
@@ -40,7 +41,8 @@ canvas.addEventListener('mousedown', (e) => {
     mouseDown(e);
 });
 
-field_image.addEventListener('load', (e) => {
+window.addEventListener('load', (e) => {
+    console.log("load");
     draw();
 })
 
